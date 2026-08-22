@@ -1,0 +1,97 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchCarById } from "../api/cars";
+import type { Car } from "../types";
+import BookingForm from "../components/reservations/BookingForm";
+
+const categoryLabels: Record<string, string> = {
+  economy: "اقتصادية",
+  suv: "SUV",
+  luxury: "فاخرة",
+  family: "عائلية",
+};
+
+export default function CarDetails() {
+  const { id } = useParams<{ id: string }>();
+  const [car, setCar] = useState<Car | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    fetchCarById(id)
+      .then(setCar)
+      .catch(() => setCar(null))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p className="text-center py-20 text-muted">جاري التحميل...</p>;
+  if (!car) return <p className="text-center py-20 text-muted">السيارة غير موجودة</p>;
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <div className="grid md:grid-cols-[1fr_360px] gap-10">
+        <div>
+          <div className="aspect-video rounded-2xl overflow-hidden bg-surface border border-surface-light mb-6">
+            {car.main_image_url ? (
+              <img
+                src={car.main_image_url}
+                alt={`${car.brand} ${car.model}`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-muted">
+                لا توجد صورة
+              </div>
+            )}
+          </div>
+
+          <h1 className="font-display font-extrabold text-3xl mb-2">
+            {car.brand} {car.model} <span className="text-muted text-xl">{car.year}</span>
+          </h1>
+          <p className="text-gold mb-6">{categoryLabels[car.category]}</p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: "ناقل الحركة", value: car.transmission === "automatic" ? "أوتوماتيك" : "يدوي" },
+              { label: "الوقود", value: car.fuel_type },
+              { label: "المقاعد", value: car.seats },
+              { label: "السعر/اليوم", value: `${car.price_per_day.toLocaleString("ar-DZ")} دج` },
+            ].map((item) => (
+              <div key={item.label} className="rounded-xl bg-surface border border-surface-light p-4">
+                <p className="text-xs text-muted mb-1">{item.label}</p>
+                <p className="font-bold">{item.value}</p>
+              </div>
+            ))}
+          </div>
+
+          {car.description && (
+            <div className="mb-8">
+              <h2 className="font-display font-bold text-lg mb-2">الوصف</h2>
+              <p className="text-muted">{car.description}</p>
+            </div>
+          )}
+
+          {car.features && car.features.length > 0 && (
+            <div>
+              <h2 className="font-display font-bold text-lg mb-3">المميزات</h2>
+              <div className="flex flex-wrap gap-2">
+                {car.features.map((f) => (
+                  <span
+                    key={f}
+                    className="text-xs rounded-full bg-surface border border-surface-light px-3 py-1.5"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <BookingForm car={car} />
+        </div>
+      </div>
+    </div>
+  );
+}
