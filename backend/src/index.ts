@@ -7,6 +7,7 @@ import healthRoutes from "./routes/health.routes";
 import authRoutes from "./routes/auth.routes";
 import carsRoutes from "./routes/cars.routes";
 import reservationsRoutes from "./routes/reservations.routes";
+import uploadRoutes from "./routes/upload.routes";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/health", healthRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cars", carsRoutes);
 app.use("/api/reservations", reservationsRoutes);
+app.use("/api/upload", uploadRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

@@ -53,7 +53,24 @@ router.get("/", validate(carFiltersSchema, "query"), async (req, res, next) => {
     next(err);
   }
 });
+/**
+ * GET /api/cars/admin/all
+ * محمي - يُرجع كل السيارات بغض النظر عن الحالة (للوحة التحكم)
+ */
+router.get("/admin/all", requireAuth, async (req, res, next) => {
+  try {
+    const { data: cars, error } = await supabase
+      .from("cars")
+      .select("*")
+      .order("created_at", { ascending: false });
 
+    if (error) throw error;
+
+    res.json({ cars });
+  } catch (err) {
+    next(err);
+  }
+});
 /**
  * GET /api/cars/:id
  * عام - تفاصيل سيارة واحدة

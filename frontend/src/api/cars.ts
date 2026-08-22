@@ -21,10 +21,24 @@ export async function fetchCarAvailability(
   }>(`/cars/${id}/availability`);
   return data.booked_ranges;
 }
-
+export async function fetchAllCarsAdmin(): Promise<Car[]> {
+  const { data } = await apiClient.get<{ cars: Car[] }>("/cars/admin/all");
+  return data.cars;
+}
 export async function createCar(payload: Partial<Car>) {
   const { data } = await apiClient.post("/cars", payload);
   return data.car as Car;
+}
+export async function uploadCarImage(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const { data } = await apiClient.post<{ url: string }>(
+    "/upload/car-image",
+    formData,
+    { headers: { "Content-Type": "multipart/form-data" } }
+  );
+  return data.url;
 }
 
 export async function updateCar(id: string, payload: Partial<Car>) {
