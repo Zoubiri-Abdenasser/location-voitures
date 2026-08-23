@@ -45,10 +45,19 @@ export default function CarDetails() {
             )}
           </div>
 
-          <h1 className="font-display font-extrabold text-2xl sm:text-3xl mb-2">
-            {car.brand} {car.model} <span className="text-muted text-lg sm:text-xl">{car.year}</span>
-          </h1>
-          <p className="text-gold-dim mb-4 sm:mb-6">{categoryLabels[car.category]}</p>
+                    <div className="flex items-center gap-3 mb-2">
+            <h1 className="font-display font-extrabold text-2xl sm:text-3xl">
+              {car.brand} {car.model} <span className="text-muted text-lg sm:text-xl">{car.year}</span>
+            </h1>
+          </div>
+
+          {car.booked_until ? (
+            <p className="inline-block text-sm font-bold bg-red-100 text-red-700 rounded-full px-4 py-1.5 mb-4 sm:mb-6">
+              محجوزة حتى {new Date(car.booked_until).toLocaleDateString("ar-DZ")}
+            </p>
+          ) : (
+            <p className="text-gold-dim mb-4 sm:mb-6">{categoryLabels[car.category]}</p>
+          )}
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {[

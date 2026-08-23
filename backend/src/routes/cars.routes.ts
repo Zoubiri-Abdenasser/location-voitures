@@ -9,6 +9,37 @@ import {
 } from "../schemas/car.schema";
 import { z } from "zod";
 
+/**
+ * يجلب تاريخ انتهاء الحجز الحالي (إن وُجد) لكل سيارة في القائمة
+ * يُعتبر "محجوزة الآن" فقط إذا كان الحجز مؤكدًا (confirmed) ويغطي تاريخ اليوم
+ */
+async function attachBookedUntil(cars: any[]): Promise<any[]> {
+  if (cars.length === 0) return cars;
+
+  const today = new Date().toISOString().split("T")[0];
+  const carIds = cars.map((c) => c.id);
+
+  const { data: activeReservations, error } = await supabase
+    .from("reservations")
+    .select("car_id, return_date")
+    .in("car_id", carIds)
+    .eq("status", "confirmed")
+    .lte("pickup_date", today)
+    .gt("return_date", today);
+
+  if (error) throw error;
+
+  const bookedMap = new Map<string, string>();
+  (activeReservations || []).forEach((r) => {
+    bookedMap.set(r.car_id, r.return_date);
+  });
+
+  return cars.map((car) => ({
+    ...car,
+    booked_until: bookedMap.get(car.id) || null,
+  }));
+}
+
 const router = Router();
 
 /**
@@ -28,8 +59,10 @@ router.get("/", validate(carFiltersSchema, "query"), async (req, res, next) => {
     if (max_price !== undefined) query = query.lte("price_per_day", max_price);
     if (seats !== undefined) query = query.gte("seats", seats);
 
-    const { data: cars, error } = await query.order("created_at", { ascending: false });
+       const { data: carsRaw, error } = await query.order("created_at", { ascending: false });
     if (error) throw error;
+
+    const cars = await attachBookedUntil(carsRaw || []);
 
     // إن أُرسل نطاق تواريخ، نستثني السيارات المحجوزة في تلك الفترة
     if (pickup_date && return_date && cars) {
@@ -77,15 +110,17 @@ router.get("/admin/all", requireAuth, async (req, res, next) => {
  */
 router.get("/:id", validate(z.object({ id: z.string().uuid() }), "params"), async (req, res, next) => {
   try {
-    const { data: car, error } = await supabase
+    const { data: carRaw, error } = await supabase
       .from("cars")
       .select("*")
       .eq("id", req.params.id)
       .single();
 
-    if (error || !car) {
+    if (error || !carRaw) {
       return res.status(404).json({ error: "السيارة غير موجودة" });
     }
+
+    const [car] = await attachBookedUntil([carRaw]);
 
     res.json({ car });
   } catch (err) {

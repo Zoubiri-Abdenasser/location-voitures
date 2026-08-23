@@ -14,12 +14,19 @@ const transmissionLabels: Record<Car["transmission"], string> = {
 };
 
 export default function CarCard({ car }: { car: Car }) {
+  const isBooked = !!car.booked_until;
+
   return (
     <Link
       to={`/cars/${car.id}`}
       className="group block rounded-2xl overflow-hidden bg-surface border border-border hover:border-gold hover:shadow-lg transition-all"
     >
-      <div className="aspect-[16/10] bg-surface-alt overflow-hidden">
+      <div className="relative aspect-[16/10] bg-surface-alt overflow-hidden">
+        {isBooked && (
+          <span className="absolute top-3 right-3 z-10 text-xs font-bold bg-red-600 text-white rounded-full px-3 py-1">
+            محجوزة حتى {new Date(car.booked_until!).toLocaleDateString("ar-DZ")}
+          </span>
+        )}
         {car.main_image_url ? (
           <img
             src={car.main_image_url}

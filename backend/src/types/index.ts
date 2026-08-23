@@ -26,6 +26,7 @@ export interface Car {
   status: CarStatus;
   created_at: string;
   updated_at: string;
+  booked_until?: string | null; // محسوبة عند القراءة فقط - تاريخ انتهاء الحجز الحالي إن وُجد
 }
 
 export interface Reservation {
