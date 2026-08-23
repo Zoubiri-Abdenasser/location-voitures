@@ -19,37 +19,13 @@ export default function SearchForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-surface shadow-xl rounded-2xl p-4 md:p-5 grid gap-3 md:grid-cols-[auto_1fr_1fr_1fr_1fr] md:items-end border border-border"
+      className="bg-surface shadow-xl rounded-2xl p-3 sm:p-4 md:p-5 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-[auto_1fr_1fr_1fr_1fr] md:items-end border border-border"
     >
-      <button
-        type="submit"
-        className="order-first md:order-none rounded-xl bg-gold text-ink font-display font-bold px-6 py-3 hover:bg-gold-dim transition-colors"
-      >
-        ابحث الآن
-      </button>
-
       <label className="block">
-        <span className="block text-xs text-muted mb-1.5">نوع السيارة</span>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
-        >
-          <option value="">اختر نوع السيارة</option>
-          <option value="economy">اقتصادية</option>
-          <option value="suv">SUV</option>
-          <option value="luxury">فاخرة</option>
-          <option value="family">عائلية</option>
-        </select>
-      </label>
-
-      <label className="block">
-        <span className="block text-xs text-muted mb-1.5">تاريخ الإرجاع</span>
+        <span className="block text-xs text-muted mb-1.5">موقع الاستلام</span>
         <input
-          type="date"
-          value={returnDate}
-          onChange={(e) => setReturnDate(e.target.value)}
-          min={pickupDate || new Date().toISOString().split("T")[0]}
+          type="text"
+          placeholder="اختر المدينة أو المطار"
           className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
         />
       </label>
@@ -66,13 +42,37 @@ export default function SearchForm() {
       </label>
 
       <label className="block">
-        <span className="block text-xs text-muted mb-1.5">موقع الاستلام</span>
+        <span className="block text-xs text-muted mb-1.5">تاريخ الإرجاع</span>
         <input
-          type="text"
-          placeholder="اختر المدينة أو المطار"
+          type="date"
+          value={returnDate}
+          onChange={(e) => setReturnDate(e.target.value)}
+          min={pickupDate || new Date().toISOString().split("T")[0]}
           className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
         />
       </label>
+
+      <label className="block">
+        <span className="block text-xs text-muted mb-1.5">نوع السيارة</span>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm focus:outline-none focus:border-gold"
+        >
+          <option value="">اختر نوع السيارة</option>
+          <option value="economy">اقتصادية</option>
+          <option value="suv">SUV</option>
+          <option value="luxury">فاخرة</option>
+          <option value="family">عائلية</option>
+        </select>
+      </label>
+
+      <button
+        type="submit"
+        className="rounded-xl bg-gold text-ink font-display font-bold px-6 py-3 hover:bg-gold-dim transition-colors sm:col-span-2 md:col-span-1"
+      >
+        ابحث الآن
+      </button>
     </form>
   );
 }

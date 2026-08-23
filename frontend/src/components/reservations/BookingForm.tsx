@@ -56,7 +56,7 @@ export default function BookingForm({ car }: { car: Car }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl bg-surface border border-border p-6 space-y-4 sticky top-24 shadow-sm"
+      className="rounded-2xl bg-surface border border-border p-6 space-y-4 lg:sticky lg:top-24 shadow-sm"
     >
       <h3 className="font-display font-bold text-lg">احجز هذه السيارة</h3>
 

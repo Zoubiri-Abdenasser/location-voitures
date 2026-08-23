@@ -33,12 +33,12 @@ export default function CarsList() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="font-display font-bold text-2xl mb-6">السيارات المتاحة</h1>
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:py-10">
+      <h1 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-6">السيارات المتاحة</h1>
 
-      <div className="grid md:grid-cols-[220px_1fr] gap-8">
-        {/* الفلاتر */}
-        <aside className="space-y-4">
+      <div className="grid md:grid-cols-[220px_1fr] gap-4 md:gap-8">
+        {/* الفلاتر - صف أفقي على الهاتف، عمود جانبي على الحاسوب */}
+        <aside className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
           <div>
             <span className="block text-xs text-muted mb-1.5">الفئة</span>
             <select
@@ -75,7 +75,7 @@ export default function CarsList() {
           ) : cars.length === 0 ? (
             <p className="text-muted">لا توجد سيارات مطابقة لبحثك.</p>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
               {cars.map((car) => (
                 <CarCard key={car.id} car={car} />
               ))}

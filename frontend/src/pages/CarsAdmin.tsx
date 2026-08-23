@@ -88,8 +88,8 @@ export default function CarsAdmin() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-display font-bold text-2xl">إدارة الأسطول</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <h1 className="font-display font-bold text-xl sm:text-2xl">إدارة الأسطول</h1>
         <button
           onClick={() => setShowForm(true)}
           className="rounded-lg bg-gold text-ink font-display font-bold px-5 py-2.5 hover:bg-gold-dim transition-colors"

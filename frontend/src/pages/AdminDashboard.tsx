@@ -47,7 +47,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <h1 className="font-display font-bold text-2xl">لوحة التحكم</h1>
         <div className="flex items-center gap-3">
           <Link
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-10">
         {[
           { label: "إجمالي الحجوزات", value: stats.total },
           { label: "قيد الانتظار", value: stats.pending },

@@ -107,7 +107,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="block">
           <span className="block text-xs text-muted mb-1">الماركة</span>
           <input
@@ -128,7 +128,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         </label>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <label className="block">
           <span className="block text-xs text-muted mb-1">سنة الصنع</span>
           <input
@@ -165,7 +165,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         </label>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <label className="block">
           <span className="block text-xs text-muted mb-1">الفئة</span>
           <select
