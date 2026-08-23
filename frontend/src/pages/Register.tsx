@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiClient } from "../api/client";
 
-// صفحة تُستخدم مرة واحدة فقط لإنشاء حساب المالك الأول
 export default function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -30,10 +29,10 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4">
+    <div className="min-h-[70vh] flex items-center justify-center px-4 bg-surface-alt">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-2xl bg-surface border border-surface-light p-8 space-y-4"
+        className="w-full max-w-sm rounded-2xl bg-surface border border-border shadow-sm p-8 space-y-4"
       >
         <h1 className="font-display font-bold text-2xl text-center mb-2">
           إنشاء حساب المالك
@@ -47,7 +46,7 @@ export default function Register() {
           <input
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2.5 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm"
           />
         </label>
 
@@ -58,7 +57,7 @@ export default function Register() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2.5 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm"
           />
         </label>
 
@@ -69,14 +68,14 @@ export default function Register() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2.5 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2.5 text-sm"
           />
           <span className="block text-[11px] text-muted mt-1">
             8 أحرف على الأقل، حرف كبير ورقم واحد على الأقل
           </span>
         </label>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
 
         <button
           type="submit"

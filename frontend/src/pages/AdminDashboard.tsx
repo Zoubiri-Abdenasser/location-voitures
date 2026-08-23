@@ -12,10 +12,10 @@ const statusLabels: Record<ReservationStatus, string> = {
 };
 
 const statusColors: Record<ReservationStatus, string> = {
-  pending: "text-gold bg-gold/10",
-  confirmed: "text-green-400 bg-green-400/10",
-  cancelled: "text-red-400 bg-red-400/10",
-  completed: "text-muted bg-muted/10",
+  pending: "text-gold-dim bg-gold/10",
+  confirmed: "text-green-700 bg-green-100",
+  cancelled: "text-red-700 bg-red-100",
+  completed: "text-muted bg-surface-alt",
 };
 
 export default function AdminDashboard() {
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-3">
           <Link
             to="/admin/cars"
-            className="text-sm rounded-lg border border-gold-dim text-gold px-4 py-2 hover:bg-gold hover:text-ink transition-colors"
+            className="text-sm rounded-lg border border-gold text-gold-dim px-4 py-2 hover:bg-gold hover:text-ink transition-colors"
           >
             إدارة الأسطول
           </Link>
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
               logoutAdmin();
               navigate("/login");
             }}
-            className="text-sm text-muted hover:text-paper"
+            className="text-sm text-muted hover:text-ink"
           >
             تسجيل الخروج
           </button>
@@ -74,9 +74,9 @@ export default function AdminDashboard() {
           { label: "قيد الانتظار", value: stats.pending },
           { label: "مؤكدة", value: stats.confirmed },
         ].map((s) => (
-          <div key={s.label} className="rounded-xl bg-surface border border-surface-light p-5">
+          <div key={s.label} className="rounded-xl bg-surface border border-border p-5">
             <p className="text-xs text-muted mb-1">{s.label}</p>
-            <p className="font-display font-extrabold text-2xl text-gold">{s.value}</p>
+            <p className="font-display font-extrabold text-2xl text-gold-dim">{s.value}</p>
           </div>
         ))}
       </div>
@@ -88,9 +88,9 @@ export default function AdminDashboard() {
       ) : reservations.length === 0 ? (
         <p className="text-muted">لا توجد حجوزات بعد.</p>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-surface-light">
+        <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-sm">
-            <thead className="bg-surface text-muted text-xs">
+            <thead className="bg-surface-alt text-muted text-xs">
               <tr>
                 <th className="text-right p-3">العميل</th>
                 <th className="text-right p-3">السيارة</th>
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
             </thead>
             <tbody>
               {reservations.map((r) => (
-                <tr key={r.id} className="border-t border-surface-light">
+                <tr key={r.id} className="border-t border-border bg-surface">
                   <td className="p-3">
                     <p>{r.customer_name}</p>
                     <p className="text-xs text-muted">{r.customer_phone}</p>

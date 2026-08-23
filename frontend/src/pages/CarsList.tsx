@@ -44,7 +44,7 @@ export default function CarsList() {
             <select
               value={filters.category || ""}
               onChange={(e) => updateFilter("category", e.target.value)}
-              className="w-full rounded-lg bg-surface border border-surface-light px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-surface border border-border px-3 py-2 text-sm"
             >
               <option value="">الكل</option>
               <option value="economy">اقتصادية</option>
@@ -59,7 +59,7 @@ export default function CarsList() {
             <select
               value={filters.transmission || ""}
               onChange={(e) => updateFilter("transmission", e.target.value)}
-              className="w-full rounded-lg bg-surface border border-surface-light px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-surface border border-border px-3 py-2 text-sm"
             >
               <option value="">الكل</option>
               <option value="automatic">أوتوماتيك</option>

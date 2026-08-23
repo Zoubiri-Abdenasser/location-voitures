@@ -46,8 +46,8 @@ export default function BookingForm({ car }: { car: Car }) {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl bg-surface border border-gold-dim p-6 text-center">
-        <p className="font-display font-bold text-gold mb-2">تم إرسال طلبك بنجاح</p>
+      <div className="rounded-2xl bg-surface border border-gold p-6 text-center shadow-sm">
+        <p className="font-display font-bold text-gold-dim mb-2">تم إرسال طلبك بنجاح</p>
         <p className="text-sm text-muted">سيتم التواصل معك قريبًا لتأكيد الحجز.</p>
       </div>
     );
@@ -56,7 +56,7 @@ export default function BookingForm({ car }: { car: Car }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl bg-surface border border-surface-light p-6 space-y-4 sticky top-24"
+      className="rounded-2xl bg-surface border border-border p-6 space-y-4 sticky top-24 shadow-sm"
     >
       <h3 className="font-display font-bold text-lg">احجز هذه السيارة</h3>
 
@@ -69,7 +69,7 @@ export default function BookingForm({ car }: { car: Car }) {
             value={pickupDate}
             min={new Date().toISOString().split("T")[0]}
             onChange={(e) => setPickupDate(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block">
@@ -80,7 +80,7 @@ export default function BookingForm({ car }: { car: Car }) {
             value={returnDate}
             min={pickupDate || new Date().toISOString().split("T")[0]}
             onChange={(e) => setReturnDate(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
       </div>
@@ -91,7 +91,7 @@ export default function BookingForm({ car }: { car: Car }) {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         />
       </label>
 
@@ -101,7 +101,7 @@ export default function BookingForm({ car }: { car: Car }) {
           required
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         />
       </label>
 
@@ -111,20 +111,20 @@ export default function BookingForm({ car }: { car: Car }) {
           required
           value={license}
           onChange={(e) => setLicense(e.target.value)}
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         />
       </label>
 
       {days > 0 && (
-        <div className="border-t border-surface-light pt-3 flex items-center justify-between">
+        <div className="border-t border-border pt-3 flex items-center justify-between">
           <span className="text-sm text-muted">{days} يوم</span>
-          <span className="font-display font-extrabold text-gold text-xl">
+          <span className="font-display font-extrabold text-gold-dim text-xl">
             {total.toLocaleString("ar-DZ")} دج
           </span>
         </div>
       )}
 
-      {status === "error" && <p className="text-sm text-red-400">{errorMsg}</p>}
+      {status === "error" && <p className="text-sm text-red-600">{errorMsg}</p>}
 
       <button
         type="submit"

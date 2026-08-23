@@ -5,14 +5,14 @@
   --font-display: "Almarai", sans-serif;
   --font-body: "Tajawal", sans-serif;
 
-  --color-ink: #14171c;
-  --color-surface: #1c2128;
-  --color-surface-light: #262c35;
-  --color-gold: #e8b94a;
-  --color-gold-dim: #b8934c;
-  --color-steel: #3d5a80;
-  --color-paper: #f2f0ea;
-  --color-muted: #8b93a1;
+  --color-paper: #f7f5f2;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0eee9;
+  --color-ink: #1a1d29;
+  --color-gold: #f5a623;
+  --color-gold-dim: #d98f1a;
+  --color-muted: #6b7280;
+  --color-border: #e5e2dc;
 }
 
 html {
@@ -21,8 +21,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-ink);
-  color: var(--color-paper);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
 }
 
 h1,
@@ -32,7 +32,7 @@ h4 {
   font-family: var(--font-display);
 }
 
-/* عنصر التوقيع البصري: خط متقطع يحاكي تقسيم حارات الطريق */
+/* عنصر التوقيع البصري: خط متقطع ذهبي يحاكي تقسيم حارات الطريق */
 .lane-divider {
   height: 3px;
   background-image: repeating-linear-gradient(

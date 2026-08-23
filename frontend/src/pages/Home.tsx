@@ -4,10 +4,30 @@ import type { Car } from "../types";
 import CarCard from "../components/cars/CarCard";
 import SearchForm from "../components/cars/SearchForm";
 
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&w=1600&auto=format&fit=crop";
+
 const features = [
-  { title: "تأمين شامل", desc: "كل سياراتنا مؤمَّنة بالكامل ضد الحوادث والسرقة" },
-  { title: "دعم على مدار الساعة", desc: "فريقنا جاهز لمساعدتك في أي وقت" },
-  { title: "أسعار شفافة", desc: "لا رسوم مخفية، السعر الذي تراه هو ما تدفعه" },
+  {
+    title: "سيارات متنوعة",
+    desc: "مجموعة واسعة تناسب الجميع",
+    icon: "🚗",
+  },
+  {
+    title: "أفضل الأسعار",
+    desc: "أسعار تنافسية بدون رسوم خفية",
+    icon: "🏷️",
+  },
+  {
+    title: "دعم 24/7",
+    desc: "نحن هنا لمساعدتك دائمًا",
+    icon: "🎧",
+  },
+  {
+    title: "تأمين شامل",
+    desc: "راحة بال طوال فترة الكراء",
+    icon: "🛡️",
+  },
 ];
 
 export default function Home() {
@@ -24,27 +44,58 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-steel/20 via-ink to-ink" />
-        <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-24 md:pt-24 md:pb-32">
-          <h1 className="font-display font-extrabold text-4xl md:text-6xl leading-tight max-w-2xl">
-            اكرِ سيارتك،
-            <br />
-            <span className="text-gold">بسهولة وأمان</span>
-          </h1>
-          <p className="text-muted mt-4 max-w-md">
-            مئات السيارات المتاحة، حجز فوري بدون تعقيد، وأسعار واضحة من البداية.
-          </p>
+      <section className="relative">
+        <div className="relative h-[560px] md:h-[620px] overflow-hidden">
+          <img
+            src={HERO_IMAGE}
+            alt="سيارة على طريق ساحلي"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-paper/40 to-paper/90" />
 
-          <div className="mt-10">
-            <SearchForm />
+          <div className="relative mx-auto max-w-7xl px-4 h-full flex items-center">
+            <div className="max-w-lg">
+              <h1 className="font-display font-extrabold text-4xl md:text-5xl leading-tight text-ink">
+                تجربة قيادة
+                <br />
+                تبدأ من هنا
+              </h1>
+              <div className="w-16 h-1 bg-gold my-5" />
+              <p className="text-muted mb-8">
+                استأجر سيارتك بسهولة وأمان بأفضل الأسعار. مجموعة واسعة من
+                السيارات تناسب جميع احتياجاتك.
+              </p>
+              <a href="/cars" className="inline-block rounded-lg bg-gold text-ink font-display font-bold px-8 py-3.5 hover:bg-gold-dim transition-colors">
+                احجز الآن
+              </a>
+            </div>
           </div>
+        </div>
+
+        {/* بطاقة البحث العائمة */}
+        <div className="relative mx-auto max-w-6xl px-4 -mt-14 md:-mt-16">
+          <SearchForm />
+        </div>
+      </section>
+
+      {/* صف المميزات */}
+      <section className="mx-auto max-w-6xl px-4 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {features.map((f) => (
+            <div key={f.title} className="flex items-start gap-3">
+              <span className="text-2xl">{f.icon}</span>
+              <div>
+                <p className="font-display font-bold text-sm">{f.title}</p>
+                <p className="text-xs text-muted">{f.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <div className="lane-divider" />
 
-      {/* Featured cars */}
+      {/* السيارات المتوفرة */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="font-display font-bold text-2xl mb-6">سيارات متوفرة الآن</h2>
 
@@ -59,22 +110,6 @@ export default function Home() {
             ))}
           </div>
         )}
-      </section>
-
-      {/* Why us */}
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <h2 className="font-display font-bold text-2xl mb-8">لماذا تختارنا؟</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {features.map((f) => (
-            <div
-              key={f.title}
-              className="rounded-2xl bg-surface border border-surface-light p-6"
-            >
-              <h3 className="font-display font-bold text-gold mb-2">{f.title}</h3>
-              <p className="text-sm text-muted">{f.desc}</p>
-            </div>
-          ))}
-        </div>
       </section>
     </div>
   );

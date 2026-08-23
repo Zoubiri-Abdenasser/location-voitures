@@ -17,9 +17,9 @@ const statusLabels: Record<string, string> = {
 };
 
 const statusColors: Record<string, string> = {
-  available: "text-green-400 bg-green-400/10",
-  maintenance: "text-gold bg-gold/10",
-  unavailable: "text-red-400 bg-red-400/10",
+  available: "text-green-700 bg-green-100",
+  maintenance: "text-gold-dim bg-gold/10",
+  unavailable: "text-red-700 bg-red-100",
 };
 
 export default function CarsAdmin() {
@@ -62,7 +62,6 @@ export default function CarsAdmin() {
     load();
   }
 
-  // إذا كنا في وضع الإضافة أو التعديل، نعرض النموذج فقط
   if (showForm) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10">
@@ -108,9 +107,9 @@ export default function CarsAdmin() {
           {cars.map((car) => (
             <div
               key={car.id}
-              className="rounded-2xl bg-surface border border-surface-light overflow-hidden"
+              className="rounded-2xl bg-surface border border-border overflow-hidden"
             >
-              <div className="aspect-[16/10] bg-surface-light">
+              <div className="aspect-[16/10] bg-surface-alt">
                 {car.main_image_url ? (
                   <img
                     src={car.main_image_url}
@@ -141,13 +140,13 @@ export default function CarsAdmin() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setEditingCar(car)}
-                    className="flex-1 text-xs rounded-lg border border-surface-light py-2 hover:border-gold-dim hover:text-gold transition-colors"
+                    className="flex-1 text-xs rounded-lg border border-border py-2 hover:border-gold hover:text-gold-dim transition-colors"
                   >
                     تعديل
                   </button>
                   <button
                     onClick={() => handleDelete(car)}
-                    className="flex-1 text-xs rounded-lg border border-red-900 text-red-400 py-2 hover:bg-red-900/20 transition-colors"
+                    className="flex-1 text-xs rounded-lg border border-red-200 text-red-600 py-2 hover:bg-red-50 transition-colors"
                   >
                     حذف
                   </button>

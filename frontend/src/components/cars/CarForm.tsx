@@ -25,7 +25,6 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
   );
   const [status, setStatus] = useState<CarStatus>(initialData?.status || "available");
 
-  // حالة الصورة: الملف المختار + رابط المعاينة + الرابط النهائي بعد الرفع
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(
     initialData?.main_image_url || null
@@ -40,7 +39,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
     if (!file) return;
 
     setImageFile(file);
-    setImagePreview(URL.createObjectURL(file)); // معاينة فورية قبل الرفع
+    setImagePreview(URL.createObjectURL(file));
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -51,7 +50,6 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
     try {
       let mainImageUrl = initialData?.main_image_url || null;
 
-      // نرفع الصورة فقط إذا اختار المستخدم ملفًا جديدًا
       if (imageFile) {
         setUploading(true);
         mainImageUrl = await uploadCarImage(imageFile);
@@ -85,20 +83,19 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl bg-surface border border-surface-light p-6 space-y-4"
+      className="rounded-2xl bg-surface border border-border p-6 space-y-4"
     >
-      {/* رفع الصورة مع المعاينة */}
       <div>
         <span className="block text-xs text-muted mb-2">صورة السيارة</span>
         <div className="flex items-center gap-4">
-          <div className="w-32 h-24 rounded-lg overflow-hidden bg-ink border border-surface-light flex items-center justify-center shrink-0">
+          <div className="w-32 h-24 rounded-lg overflow-hidden bg-surface-alt border border-border flex items-center justify-center shrink-0">
             {imagePreview ? (
               <img src={imagePreview} alt="معاينة" className="w-full h-full object-cover" />
             ) : (
               <span className="text-xs text-muted">لا توجد صورة</span>
             )}
           </div>
-          <label className="cursor-pointer text-sm text-gold border border-gold-dim rounded-lg px-4 py-2 hover:bg-gold hover:text-ink transition-colors">
+          <label className="cursor-pointer text-sm text-gold-dim border border-gold rounded-lg px-4 py-2 hover:bg-gold hover:text-ink transition-colors">
             {imagePreview ? "تغيير الصورة" : "اختر صورة"}
             <input
               type="file"
@@ -117,7 +114,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
             required
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block">
@@ -126,7 +123,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
             required
             value={model}
             onChange={(e) => setModel(e.target.value)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
       </div>
@@ -139,7 +136,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
             required
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block">
@@ -151,7 +148,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
             max={9}
             value={seats}
             onChange={(e) => setSeats(Number(e.target.value))}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
         <label className="block">
@@ -163,7 +160,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
             step="0.01"
             value={pricePerDay}
             onChange={(e) => setPricePerDay(Number(e.target.value))}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           />
         </label>
       </div>
@@ -174,7 +171,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as CarCategory)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           >
             <option value="economy">اقتصادية</option>
             <option value="suv">SUV</option>
@@ -187,7 +184,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
           <select
             value={transmission}
             onChange={(e) => setTransmission(e.target.value as Transmission)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           >
             <option value="automatic">أوتوماتيك</option>
             <option value="manual">يدوي</option>
@@ -198,7 +195,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
           <select
             value={fuelType}
             onChange={(e) => setFuelType(e.target.value as FuelType)}
-            className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
           >
             <option value="essence">بنزين</option>
             <option value="diesel">ديزل</option>
@@ -214,7 +211,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         />
       </label>
 
@@ -226,7 +223,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
           value={featuresText}
           onChange={(e) => setFeaturesText(e.target.value)}
           placeholder="مكيف، GPS، بلوتوث"
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         />
       </label>
 
@@ -235,7 +232,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value as CarStatus)}
-          className="w-full rounded-lg bg-ink border border-surface-light px-3 py-2 text-sm"
+          className="w-full rounded-lg bg-paper border border-border px-3 py-2 text-sm"
         >
           <option value="available">متاحة</option>
           <option value="maintenance">في الصيانة</option>
@@ -243,7 +240,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         </select>
       </label>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <div className="flex gap-3 pt-2">
         <button
@@ -256,7 +253,7 @@ export default function CarForm({ initialData, onSubmit, onCancel }: CarFormProp
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 rounded-lg border border-surface-light text-muted py-2.5 hover:text-paper transition-colors"
+          className="flex-1 rounded-lg border border-border text-muted py-2.5 hover:text-ink transition-colors"
         >
           إلغاء
         </button>

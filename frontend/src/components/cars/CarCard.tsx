@@ -17,9 +17,9 @@ export default function CarCard({ car }: { car: Car }) {
   return (
     <Link
       to={`/cars/${car.id}`}
-      className="group block rounded-2xl overflow-hidden bg-surface border border-surface-light hover:border-gold-dim transition-colors"
+      className="group block rounded-2xl overflow-hidden bg-surface border border-border hover:border-gold hover:shadow-lg transition-all"
     >
-      <div className="aspect-[16/10] bg-surface-light overflow-hidden">
+      <div className="aspect-[16/10] bg-surface-alt overflow-hidden">
         {car.main_image_url ? (
           <img
             src={car.main_image_url}
@@ -51,12 +51,12 @@ export default function CarCard({ car }: { car: Car }) {
 
         <div className="flex items-end justify-between">
           <div>
-            <span className="text-2xl font-display font-extrabold text-gold">
+            <span className="text-2xl font-display font-extrabold text-gold-dim">
               {car.price_per_day.toLocaleString("ar-DZ")}
             </span>
             <span className="text-xs text-muted mr-1">دج / يوم</span>
           </div>
-          <span className="text-sm text-gold group-hover:translate-x-[-4px] transition-transform">
+          <span className="text-sm text-gold-dim group-hover:translate-x-[-4px] transition-transform">
             التفاصيل ←
           </span>
         </div>

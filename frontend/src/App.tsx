@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
 import CarsAdmin from "./pages/CarsAdmin";
+import Services from "./pages/Services";
 
 import Home from "./pages/Home";
 import CarsList from "./pages/CarsList";
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/cars" element={<CarsList />} />
           <Route path="/cars/:id" element={<CarDetails />} />
           <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
