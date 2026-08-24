@@ -3,6 +3,7 @@ import MainLayout from "./components/layout/MainLayout";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
 import CarsAdmin from "./pages/CarsAdmin";
 import Services from "./pages/Services";
+import EmployeesAdmin from "./pages/EmployeesAdmin";
 
 import Home from "./pages/Home";
 import CarsList from "./pages/CarsList";
@@ -30,6 +31,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/cars" element={<CarsAdmin />} />
+            <Route path="/admin/employees" element={<EmployeesAdmin />} />
           </Route>
         </Route>
       </Routes>

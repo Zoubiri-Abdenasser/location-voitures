@@ -55,8 +55,12 @@ export interface CarFilters {
   return_date?: string;
 }
 
+export type AdminRole = "manager" | "employee";
+
 export interface Admin {
   id: string;
   email: string;
   full_name: string | null;
+  role: AdminRole;
+  created_at?: string;
 }

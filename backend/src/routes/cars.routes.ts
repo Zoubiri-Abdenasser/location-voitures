@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { supabase } from "../config/supabase";
-import { requireAuth } from "../middleware/auth";
+import { requireAuth, requireManager } from "../middleware/auth";
 import { validate } from "../middleware/validate";
 import {
   createCarSchema,
@@ -156,7 +156,7 @@ router.get(
  * POST /api/cars
  * محمي - إضافة سيارة جديدة
  */
-router.post("/", requireAuth, validate(createCarSchema), async (req, res, next) => {
+router.post("/", requireAuth, requireManager, validate(createCarSchema), async (req, res, next) => {
   try {
     const { data: car, error } = await supabase
       .from("cars")
@@ -179,6 +179,7 @@ router.post("/", requireAuth, validate(createCarSchema), async (req, res, next) 
 router.put(
   "/:id",
   requireAuth,
+  requireManager,
   validate(z.object({ id: z.string().uuid() }), "params"),
   validate(updateCarSchema),
   async (req, res, next) => {
@@ -208,6 +209,7 @@ router.put(
 router.delete(
   "/:id",
   requireAuth,
+  requireManager,
   validate(z.object({ id: z.string().uuid() }), "params"),
   async (req, res, next) => {
     try {

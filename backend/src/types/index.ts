@@ -44,11 +44,14 @@ export interface Reservation {
   created_at: string;
 }
 
+export type AdminRole = "manager" | "employee";
+
 export interface Admin {
   id: string;
   email: string;
   password_hash: string;
   full_name: string | null;
+  role: AdminRole;
   created_at: string;
 }
 
@@ -56,4 +59,5 @@ export interface Admin {
 export interface AuthPayload {
   adminId: string;
   email: string;
+  role: AdminRole;
 }

@@ -29,3 +29,11 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ error: "غير مصرح - التوكن غير صالح أو منتهي الصلاحية" });
   }
 }
+
+// يُستخدم بعد requireAuth للتأكد أن المستخدم مدير (وليس موظفًا)
+export function requireManager(req: Request, res: Response, next: NextFunction) {
+  if (req.admin?.role !== "manager") {
+    return res.status(403).json({ error: "هذا الإجراء متاح للمدير فقط" });
+  }
+  next();
+}

@@ -3,6 +3,7 @@ import { fetchReservations, updateReservationStatus } from "../api/reservations"
 import type { Reservation, ReservationStatus } from "../types";
 import { logoutAdmin } from "../api/auth";
 import { useNavigate, Link } from "react-router-dom";
+import { isManager } from "../api/auth";
 
 const statusLabels: Record<ReservationStatus, string> = {
   pending: "قيد الانتظار",
@@ -49,13 +50,23 @@ export default function AdminDashboard() {
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <h1 className="font-display font-bold text-2xl">لوحة التحكم</h1>
-        <div className="flex items-center gap-3">
-          <Link
-            to="/admin/cars"
-            className="text-sm rounded-lg border border-gold text-gold-dim px-4 py-2 hover:bg-gold hover:text-ink transition-colors"
-          >
-            إدارة الأسطول
-          </Link>
+                <div className="flex items-center gap-3">
+          {isManager() && (
+            <>
+              <Link
+                to="/admin/cars"
+                className="text-sm rounded-lg border border-gold text-gold-dim px-4 py-2 hover:bg-gold hover:text-ink transition-colors"
+              >
+                إدارة الأسطول
+              </Link>
+              <Link
+                to="/admin/employees"
+                className="text-sm rounded-lg border border-border text-muted px-4 py-2 hover:text-ink transition-colors"
+              >
+                الحسابات
+              </Link>
+            </>
+          )}
           <button
             onClick={() => {
               logoutAdmin();
